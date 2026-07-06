@@ -239,55 +239,40 @@
   }
 
   /* ---------- About ---------- */
-  #about{background:var(--sage);}
-  .about-grid{
-    display:grid;
-    grid-template-columns:280px 1fr;
-    gap:60px;
-    align-items:start;
+  #about{background:var(--sage);padding-top:90px;}
+  #about .section-inner{
+    max-width:100%;
+    padding:40px 0 0;
   }
-  .about-photo{
-    width:280px;
-    height:340px;
-    border-radius:0px;
+  #about .eyebrow{
+    padding-left:40px;
+  }
+  .about-image-wrap{
+    width:100%;
+  }
+  .about-image-wrap img{
+    display:block;
+    width:100%;
+    height:auto;
+  }
+  .about-image-placeholder{
+    width:100%;
+    aspect-ratio:16/9;
     background:var(--cream-dim);
-    border:6px solid var(--ink);
+    border-top:3px dashed var(--sage-dark);
+    border-bottom:3px dashed var(--sage-dark);
     display:flex;
     align-items:center;
     justify-content:center;
     color:var(--ink-soft);
     font-family:'Baloo 2',sans-serif;
-    font-size:.85rem;
     text-align:center;
-    box-shadow:8px 8px 0 rgba(35,38,31,.3);
-  }
-  .about-text p{
-    font-size:1.05rem;
-    line-height:1.85;
-    color:var(--ink-soft);
-    max-width:620px;
-    margin-bottom:18px;
-  }
-  .about-tags{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    margin-top:22px;
-  }
-  .about-tags span{
-    font-family:'Baloo 2',sans-serif;
-    font-size:.78rem;
-    letter-spacing:1px;
-    text-transform:uppercase;
-    padding:8px 16px;
-    border-radius:30px;
-    background:var(--ink);
-    color:var(--cream);
+    padding:20px;
   }
 
   /* ---------- Works ---------- */
   #works{background:var(--sage-dark);}
-  #works .eyebrow,#works .about-tags span{opacity:1;}
+  #works .eyebrow{opacity:1;}
   #works .section-title, #works .eyebrow{color:var(--cream);}
   .works-note{
     color:var(--cream-dim);
@@ -389,14 +374,18 @@
   .modal-frame{
     position:relative;
     display:flex;
+    flex-direction:column;
     align-items:center;
-    justify-content:center;
+    gap:20px;
     max-width:100%;
     max-height:82vh;
+    overflow-y:auto;
+    padding-right:6px;
   }
+  .modal-frame::-webkit-scrollbar{width:8px;}
+  .modal-frame::-webkit-scrollbar-thumb{background:var(--sage-dark);border-radius:8px;}
   .modal-frame img{
     max-width:100%;
-    max-height:82vh;
     border-radius:8px;
     box-shadow:0 12px 30px rgba(0,0,0,.4);
     display:block;
@@ -416,39 +405,9 @@
     text-align:center;
     padding:20px;
   }
-  .modal-arrow{
-    background:var(--cream);
-    border:2px solid var(--ink);
-    color:var(--ink);
-    width:44px;
-    height:44px;
-    border-radius:50%;
-    font-size:1.2rem;
-    cursor:pointer;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-shrink:0;
-  }
-  .modal-arrow:hover{background:var(--ink);color:var(--cream);}
-  .modal-nav-row{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:24px;
-    width:100%;
-  }
-  .modal-counter{
-    margin-top:14px;
-    color:var(--cream-dim);
-    font-family:'Baloo 2',sans-serif;
-    font-size:.85rem;
-    letter-spacing:1px;
-  }
 
   @media (max-width:600px){
     .modal-close{top:-52px;}
-    .modal-arrow{width:36px;height:36px;font-size:1rem;}
   }
 
   /* ---------- Contact ---------- */
@@ -529,8 +488,7 @@
   @media (max-width:820px){
     header{padding:20px 24px;}
     nav{gap:20px;}
-    .about-grid,.contact-grid{grid-template-columns:1fr;}
-    .about-photo{width:100%;height:280px;}
+    .contact-grid{grid-template-columns:1fr;}
     .section-inner{padding:100px 24px 80px;}
   }
   @media (max-width:520px){
@@ -575,19 +533,21 @@
 <section id="about">
   <div class="section-inner">
     <div class="eyebrow">About</div>
-    <h2 class="section-title">Hi, I'm RG</h2>
-    <div class="about-grid">
-      <div class="about-photo">Your photo here</div>
-      <div class="about-text">
-        <p>Replace this paragraph with your own introduction — who you are, what kind of design work you do, and how you got into it. Keep it short and personal; two or three sentences is usually enough.</p>
-        <p>Mention the tools you work with, the kind of projects you enjoy, and anything that makes your process distinct.</p>
-        <div class="about-tags">
-          <span>Branding</span>
-          <span>Packaging</span>
-          <span>Print Design</span>
-          <span>Layout</span>
-        </div>
-      </div>
+    <!--
+      ABOUT IMAGE
+      Since your own design already has your intro, contact info, and
+      skills laid out the way you want, just drop your image link/path
+      in the src below — no need to redesign it here.
+      The image stretches edge-to-edge and automatically fills the
+      full width of the browser window on any screen size (phone,
+      tablet, desktop) — no side margins, no cropping.
+    -->
+    <div class="about-image-wrap">
+      <img src="https://i.imgur.com/X83P4gv.jpg" alt="About Rachelle Anne Gimoro — graphic designer bio, contact info, and skills">
+     <!-- <div class="about-image-placeholder">Add your About page image here</div>
+      <!-- Once you have your image ready, delete the line above and use this instead:
+      <img src="about.jpg" alt="About Rachelle Anne Gimoro — graphic designer bio, contact info, and skills">
+      -->
     </div>
   </div>
 </section>
@@ -607,12 +567,7 @@
   <div class="modal-box">
     <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
     <div class="modal-title" id="modalTitle"></div>
-    <div class="modal-nav-row">
-      <button class="modal-arrow" id="modalPrev" aria-label="Previous image">‹</button>
-      <div class="modal-frame" id="modalFrame"></div>
-      <button class="modal-arrow" id="modalNext" aria-label="Next image">›</button>
-    </div>
-    <div class="modal-counter" id="modalCounter"></div>
+    <div class="modal-frame" id="modalFrame"></div>
   </div>
 </div>
 
@@ -662,8 +617,8 @@
          images: ["works/logo-design-cover.jpg","works/logo-design-1.jpg"] }
   ========================================================= */
   const projects = [
-    { title: "Logo Design", images: ["https://i.imgur.com/aNixBpl.jpg"] },
-    { title: "Print Media", images: ["https://i.imgur.com/mRo6xe3.jpg" ] },
+    { title: "Logo Design", images: ["https://i.imgur.com/ZUKFGjW.jpg", "https://i.imgur.com/aNixBpl.jpg"] },
+    { title: "Print Media", images: ["https://i.imgur.com/DykVPvX.jpg", "https://i.imgur.com/zRUzZ8N.jpg", "https://i.imgur.com/2LLUMVC.jpg"] },
     { title: "Project 03", images: [""] },
     { title: "Project 04", images: [""] },
     { title: "Project 05", images: [""] },
@@ -674,13 +629,9 @@
   const overlay = document.getElementById("modalOverlay");
   const modalTitle = document.getElementById("modalTitle");
   const modalFrame = document.getElementById("modalFrame");
-  const modalCounter = document.getElementById("modalCounter");
-  const prevBtn = document.getElementById("modalPrev");
-  const nextBtn = document.getElementById("modalNext");
   const closeBtn = document.getElementById("modalClose");
 
   let currentProject = 0;
-  let currentImage = 0;
 
   // Build the work cards from the projects array
   projects.forEach((project, index) => {
@@ -698,7 +649,6 @@
 
   function openProject(index) {
     currentProject = index;
-    currentImage = 0;
     renderModal();
     overlay.classList.add("active");
   }
@@ -710,34 +660,20 @@
   function renderModal() {
     const project = projects[currentProject];
     const images = project.images;
-    const src = images[currentImage];
 
     modalTitle.textContent = project.hideTitle ? "" : project.title;
 
-    modalFrame.innerHTML = src
-      ? `<img src="${src}" alt="${project.title}">`
-      : `<div class="modal-placeholder">Add image for<br>"${project.title}"</div>`;
-
-    const multiple = images.length > 1;
-    prevBtn.style.display = multiple ? "flex" : "none";
-    nextBtn.style.display = multiple ? "flex" : "none";
-    modalCounter.textContent = multiple ? `${currentImage + 1} / ${images.length}` : "";
+    // Stack every image for this project so the employer can just
+    // scroll down through them — no arrows or clicking needed.
+    modalFrame.innerHTML = images
+      .map((src) =>
+        src
+          ? `<img src="${src}" alt="${project.title}">`
+          : `<div class="modal-placeholder">Add image for<br>"${project.title}"</div>`
+      )
+      .join("");
   }
 
-  function showPrev() {
-    const images = projects[currentProject].images;
-    currentImage = (currentImage - 1 + images.length) % images.length;
-    renderModal();
-  }
-
-  function showNext() {
-    const images = projects[currentProject].images;
-    currentImage = (currentImage + 1) % images.length;
-    renderModal();
-  }
-
-  prevBtn.addEventListener("click", (e) => { e.stopPropagation(); showPrev(); });
-  nextBtn.addEventListener("click", (e) => { e.stopPropagation(); showNext(); });
   closeBtn.addEventListener("click", closeModal);
 
   // Click outside the image/box closes the popup
@@ -749,8 +685,6 @@
   document.addEventListener("keydown", (e) => {
     if (!overlay.classList.contains("active")) return;
     if (e.key === "Escape") closeModal();
-    if (e.key === "ArrowLeft") showPrev();
-    if (e.key === "ArrowRight") showNext();
   });
 </script>
 </body>
