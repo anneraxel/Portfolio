@@ -245,7 +245,7 @@
     padding:40px 0 0;
   }
   #about .eyebrow{
-    padding-left:40px;
+    padding-left:0px;
   }
   .about-image-wrap{
     width:100%;
@@ -287,21 +287,22 @@
     gap:28px;
   }
   .work-card{
+    position:relative;
     background:var(--cream);
     border-radius:10px;
     overflow:hidden;
-    aspect-ratio:4/5;
+    aspect-ratio:4/3;
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:center;
     color:var(--sage-dark);
-    border:0px solid var(--ink);
+    border:4px solid var(--ink);
     box-shadow:6px 6px 0 rgba(0,0,0,.25);
     cursor:pointer;
     transition:transform .2s ease;
     text-align:center;
-    padding:0px;
+    padding:20px;
   }
   .work-card:hover{transform:translateY(-6px);}
   .work-card .plus{
@@ -317,45 +318,51 @@
     text-transform:uppercase;
   }
   .work-card img{
+    position:absolute;
+    inset:0;
     width:100%;
     height:100%;
     object-fit:cover;
     display:block;
+    transition:opacity .45s ease;
   }
+  /* First image shows by default; second image (if the project has
+     one) crossfades in on hover. If there's only one image, it just
+     stays put. */
+  .work-card img:nth-of-type(1){opacity:1;z-index:1;}
+  .work-card img:nth-of-type(2){opacity:0;z-index:2;}
+  .work-card:hover img:nth-of-type(1){opacity:0;}
+  .work-card:hover img:nth-of-type(2){opacity:1;}
 
-  /* ---------- Project Popup (Lightbox) ---------- */
+  /* ---------- Project Popup (Behance-style scrollable page) ---------- */
   .modal-overlay{
     position:fixed;
     inset:0;
     z-index:200;
     display:none;
-    align-items:center;
-    justify-content:center;
-    padding:40px;
-    background:rgba(44,47,40,.55);
+    overflow-y:auto;
+    background:rgba(44,47,40,.6);
     backdrop-filter:blur(3px);
   }
-  .modal-overlay.active{display:flex;}
+  .modal-overlay.active{display:block;}
 
   .modal-box{
     position:relative;
     max-width:min(94vw,1300px);
-    max-height:92vh;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
+    margin:70px auto 90px;
   }
   .modal-close{
-    position:absolute;
-    top:-46px;
-    right:0;
+    position:fixed;
+    top:24px;
+    right:24px;
+    z-index:210;
     background:var(--cream);
     border:2px solid var(--ink);
     color:var(--ink);
-    width:38px;
-    height:38px;
+    width:42px;
+    height:42px;
     border-radius:50%;
-    font-size:1.1rem;
+    font-size:1.15rem;
     font-family:'Baloo 2',sans-serif;
     cursor:pointer;
     display:flex;
@@ -365,26 +372,20 @@
   .modal-title{
     font-family:'Baloo 2',sans-serif;
     color:var(--cream);
-    font-size:1.15rem;
+    font-size:1.3rem;
     letter-spacing:1px;
-    margin-bottom:14px;
+    margin-bottom:24px;
     text-align:center;
   }
   .modal-title:empty{display:none;}
   .modal-frame{
-    position:relative;
     display:flex;
     flex-direction:column;
     align-items:center;
-    gap:20px;
-    max-width:100%;
-    max-height:82vh;
-    overflow-y:auto;
-    padding-right:6px;
+    gap:26px;
   }
-  .modal-frame::-webkit-scrollbar{width:8px;}
-  .modal-frame::-webkit-scrollbar-thumb{background:var(--sage-dark);border-radius:8px;}
   .modal-frame img{
+    width:100%;
     max-width:100%;
     border-radius:8px;
     box-shadow:0 12px 30px rgba(0,0,0,.4);
@@ -407,7 +408,8 @@
   }
 
   @media (max-width:600px){
-    .modal-close{top:-52px;}
+    .modal-close{top:16px;right:16px;}
+    .modal-box{margin:60px auto 60px;}
   }
 
   /* ---------- Contact ---------- */
@@ -543,9 +545,9 @@
       tablet, desktop) — no side margins, no cropping.
     -->
     <div class="about-image-wrap">
-      <img src="https://i.imgur.com/3lXQJzS.jpg" alt="About Rachelle Anne Gimoro — graphic designer bio, contact info, and skills">
+       <img src="https://i.imgur.com/3lXQJzS.jpg" alt="About Rachelle Anne Gimoro — graphic designer bio, contact info, and skills">
      <!-- <div class="about-image-placeholder">Add your About page image here</div>
-      Once you have your image ready, delete the line above and use this instead:
+       Once you have your image ready, delete the line above and use this instead:
       <img src="about.jpg" alt="About Rachelle Anne Gimoro — graphic designer bio, contact info, and skills">
       -->
     </div>
@@ -617,8 +619,8 @@
          images: ["works/logo-design-cover.jpg","works/logo-design-1.jpg"] }
   ========================================================= */
   const projects = [
-    { title: "Logo Design", images: ["https://i.imgur.com/ZUKFGjW.jpg", "https://i.imgur.com/aNixBpl.jpg"] },
-    { title: "Print Media", images: ["https://i.imgur.com/DykVPvX.jpg", "https://i.imgur.com/zRUzZ8N.jpg", "https://i.imgur.com/2LLUMVC.jpg"] },
+    { title: "Logo Design", images: ["https://i.imgur.com/ZUKFGjW.jpg"] },
+    { title: "Print Media", images: ["https://i.imgur.com/mRo6xe3.jpg"] },
     { title: "Project 03", images: [""] },
     { title: "Project 04", images: [""] },
     { title: "Project 05", images: [""] },
@@ -633,16 +635,24 @@
 
   let currentProject = 0;
 
-  // Build the work cards from the projects array
+  // Build the work cards from the projects array.
+  // The first image is the default cover; if a second image exists,
+  // it crossfades in on hover (see .work-card img:nth-of-type CSS).
   projects.forEach((project, index) => {
     const card = document.createElement("div");
     card.className = "work-card";
     card.onclick = () => openProject(index);
 
     const firstImage = project.images[0];
-    card.innerHTML = firstImage
-      ? `<img src="${firstImage}" alt="${project.title}">`
-      : `<div class="plus">+</div><span>${project.title}</span>`;
+    const secondImage = project.images[1];
+
+    if (firstImage) {
+      let html = `<img src="${firstImage}" alt="${project.title}">`;
+      if (secondImage) html += `<img src="${secondImage}" alt="${project.title}">`;
+      card.innerHTML = html;
+    } else {
+      card.innerHTML = `<div class="plus">+</div><span>${project.title}</span>`;
+    }
 
     worksGrid.appendChild(card);
   });
@@ -651,10 +661,13 @@
     currentProject = index;
     renderModal();
     overlay.classList.add("active");
+    overlay.scrollTop = 0;
+    document.body.style.overflow = "hidden";
   }
 
   function closeModal() {
     overlay.classList.remove("active");
+    document.body.style.overflow = "";
   }
 
   function renderModal() {
