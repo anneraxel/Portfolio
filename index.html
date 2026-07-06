@@ -36,9 +36,9 @@
     left:-25%;
     width:150%;
     height:150%;
-    z-index:0;
+    z-index:40;
     pointer-events:none;
-    opacity:.28;
+    opacity:.35;
     mix-blend-mode:overlay;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     animation:grainMove 1s steps(6) infinite;
@@ -354,8 +354,8 @@
 
   .modal-box{
     position:relative;
-    max-width:min(92vw,900px);
-    max-height:88vh;
+    max-width:min(94vw,1300px);
+    max-height:92vh;
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -385,23 +385,24 @@
     margin-bottom:14px;
     text-align:center;
   }
+  .modal-title:empty{display:none;}
   .modal-frame{
     position:relative;
     display:flex;
     align-items:center;
     justify-content:center;
     max-width:100%;
-    max-height:72vh;
+    max-height:82vh;
   }
   .modal-frame img{
     max-width:100%;
-    max-height:72vh;
+    max-height:82vh;
     border-radius:8px;
     box-shadow:0 12px 30px rgba(0,0,0,.4);
     display:block;
   }
   .modal-placeholder{
-    width:520px;
+    width:640px;
     max-width:80vw;
     aspect-ratio:4/5;
     background:var(--cream);
@@ -647,19 +648,26 @@
   /* =========================================================
      WORKS DATA
      Edit this array to add your real projects.
-     - title: name shown on the card and in the popup
+     - title: name shown on the card and in the popup (also used
+       for accessibility, so keep it even if hideTitle is true)
      - images: list of image file paths (1, 2, 3... as many as you like)
        Leave an empty string "" to show a placeholder slot until
        you have the real image ready.
-     Example once you have real files:
-       { title: "Menu Card", images: ["works/menu-1.jpg","works/menu-2.jpg"] }
+     - hideTitle: set to true if your own image ALREADY has a title
+       baked into it (like your "LOGO DESIGN" cover slide) — this
+       stops the site from adding its own text heading on top of it.
+
+     Example:
+       { title: "Logo Design", hideTitle: true,
+         images: ["works/logo-design-cover.jpg","works/logo-design-1.jpg"] }
   ========================================================= */
   const projects = [
-    { title: "Logo Folio", images: ["https://i.imgur.com/aNixBpl.jpg"] },
-    { title: "Print Media", images: ["https://i.imgur.com/zRUzZ8N.jpg"] },
-    { title: "Packaging Design", images: [""] },
-    { title: "AI-Assisted Vissualization", images: [""] },
-    { title: "Website Design", images: [""] },
+    { title: "Logo Design", images: ["https://i.imgur.com/aNixBpl.jpg"] },
+    { title: "Print Media", images: ["https://i.imgur.com/zRUzZ8N.jpg", "https://i.imgur.com/2LLUMVC.jpg", "https://i.imgur.com/Btlw1xd.jpg" ] },
+    { title: "Project 03", images: [""] },
+    { title: "Project 04", images: [""] },
+    { title: "Project 05", images: [""] },
+    { title: "Project 06", images: [""] },
   ];
 
   const worksGrid = document.getElementById("worksGrid");
@@ -704,7 +712,7 @@
     const images = project.images;
     const src = images[currentImage];
 
-    modalTitle.textContent = project.title;
+    modalTitle.textContent = project.hideTitle ? "" : project.title;
 
     modalFrame.innerHTML = src
       ? `<img src="${src}" alt="${project.title}">`
