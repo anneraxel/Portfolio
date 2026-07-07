@@ -66,9 +66,9 @@
     display:flex;
     align-items:center;
     justify-content:space-between;
-    padding:22px 48px;
+    padding:20px 48px;
     font-family:'Baloo 2',sans-serif;
-    background:rgba(170,184,154,.88);
+    background:rgba(170,184,154,.60);
     backdrop-filter:blur(10px);
     box-shadow:0 2px 14px rgba(35,38,31,.12);
   }
@@ -166,7 +166,7 @@
     align-items:center;
     justify-content:center;
     padding:22px 48px;
-    background-color:var(--brush);
+    background-color:transparent;
     background-image:url("https://i.imgur.com/qSfyLYb.png");
     background-size:100% 100%;
     background-repeat:no-repeat;
@@ -612,8 +612,8 @@
       <div class="contact-info">
         <p>Have a project in mind? Send a message and I'll get back to you as soon as I can.</p>
         <ul class="contact-list">
-          <li><span>Email</span><a href="mailto:hello@example.com">hello@example.com</a></li>
-          <li><span>Phone</span>+63 000 000 0000</li>
+          <li><span>Email</span><a href="mailto:anneraxel@gmail.com">anneraxel@gmail.com</a></li>
+          <li><span>Phone</span>+63 916 212 1922</li>
           <li><span>Based in</span>Philippines</li>
         </ul>
       </div>
@@ -635,22 +635,6 @@
   /* =========================================================
      WORKS DATA
      Edit this array to add your real projects.
-     - title: name shown on the card and in the popup (also used
-       for accessibility, so keep it even if hideTitle is true)
-     - images: list of image file paths (1, 2, 3... as many as you like)
-       Leave an empty string "" to show a placeholder slot until
-       you have the real image ready.
-     - hideTitle: set to true if your own image ALREADY has a title
-       baked into it (like your "LOGO DESIGN" cover slide) — this
-       stops the site from adding its own text heading on top of it.
-
-     Example:
-       { title: "Logo Design", hideTitle: true,
-         images: ["works/logo-design-cover.jpg","works/logo-design-1.jpg"] }
-  ========================================================= */
-  /* =========================================================
-     WORKS DATA
-     Edit this array to add your real projects.
      - title: name shown in the slide and popup (also used for
        accessibility, so keep it even if hideTitle is true)
      - category: small label above the title (e.g. "Print & Packaging").
@@ -669,11 +653,11 @@
   ========================================================= */
   const projects = [
     { title: "Logo Design", category: "", images: ["https://i.imgur.com/ZUKFGjW.jpg", "https://i.imgur.com/aNixBpl.jpg"] },
-    { title: "Print Media", category: "", images: ["https://i.imgur.com/DykVPvX.jpg", "https://i.imgur.com/zRUzZ8N.jpg", "https://i.imgur.com/2LLUMVC.jpg"] },
-    { title: "Packaging Design", category: "", images: [""] },
-    { title: "AI-Assisted Visualization", category: "", images: [""] },
-    { title: "Website Design", category: "", images: [""] },
-    { title: "Project 06", category: "", images: [""] },
+    { title: "Print Media", category: "", images: ["https://i.imgur.com/DykVPvX.jpg", "https://i.imgur.com/zRUzZ8N.jpg", "https://i.imgur.com/Btlw1xd.jpg", "https://i.imgur.com/2LLUMVC.jpg", "https://i.imgur.com/dSaHYDk.jpg", "https://i.imgur.com/VrMcaTF.jpg", "https://i.imgur.com/Ehd3jpa.jpg", "https://i.imgur.com/LteOcCG.jpg", "https://i.imgur.com/cvlBJVi.jpg", "https://i.imgur.com/h5fFiOn.jpg"] },
+    { title: "Packaging Design", category: "", images: ["https://i.imgur.com/KPOMvGi.jpg", "https://i.imgur.com/UEMS61W.jpg", "https://i.imgur.com/npvLmky.jpg", "https://i.imgur.com/MoknmVs.jpg"] },
+    { title: "AI-Assisted Visualization", category: "", images: ["https://i.imgur.com/0zn6iOc.jpg"] },
+    { title: "Website Design", category: "", images: ["https://i.imgur.com/dkOVTbN.jpg"] },
+   
   ];
 
   const worksGrid = document.getElementById("worksGrid");
