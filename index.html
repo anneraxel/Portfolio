@@ -6,7 +6,7 @@
 <title>RG — Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Caveat:wght@600;700&family=Poppins:wght@300;400;500;600&family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Caveat:wght@600;700&family=Poppins:wght@300;400;500;600&family=Tangerine:wght@400;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
     --sage-light:#aab89a;
@@ -20,7 +20,10 @@
   }
 
   *{margin:0;padding:0;box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
+  html{
+    scroll-behavior:smooth;
+    scroll-snap-type:y mandatory;
+  }
 
   body{
     font-family:'Poppins',sans-serif;
@@ -56,7 +59,17 @@
   }
 
   section{position:relative;z-index:1;}
-  #about, #works, #contact{scroll-margin-top:90px;}
+  #home, #about, #works, #contact{
+    scroll-snap-align:start;
+    scroll-snap-stop:always;
+  }
+  #about, #works, #contact{
+    scroll-margin-top:90px;
+    height:100vh;
+  }
+  #about, #contact{
+    overflow-y:auto;
+  }
 
   /* ---------- Header ---------- */
   .header-hover-zone{
@@ -73,7 +86,7 @@
     align-items:center;
     justify-content:space-between;
     padding:20px 48px;
-    font-family:'Elms Sans',sans-serif;
+    font-family:'Manrope',sans-serif;
     background:rgba(170,184,154,.60);
     backdrop-filter:blur(10px);
     box-shadow:0 2px 14px rgba(35,38,31,.12);
@@ -131,7 +144,7 @@
   }
 
   .hero-title{
-    font-family:'Elms Sans',sans-serif;
+    font-family:'Manrope',sans-serif;
     font-weight:900;
     font-size:clamp(3.5rem,12vw,8.5rem);
     letter-spacing:2px;
@@ -203,7 +216,7 @@
     justify-content:center;
   }
   .badge-text .graphic{
-    font-family:'Elms Sans',sans-serif;
+    font-family:'Manrope',sans-serif;
     font-weight:700;
     font-size:clamp(1.4rem,3.4vw,2.2rem);
     color:var(--cream);
@@ -401,7 +414,7 @@
     text-shadow:2px 2px 0 rgba(0,0,0,.35);
   }
   .panel-title-main{
-    font-family:'Elms Sans','Baloo 2',sans-serif;
+    font-family:'Manrope','Baloo 2',sans-serif;
   }
   .panel-title-accent{
     font-family:'Tangerine',cursive;
@@ -704,7 +717,7 @@
 <script>
   const projects = [
     { title: "Logo Design", category: "", description: "A collection of logo concepts created for client briefs, design competitions, and branding projects across various industries.", images: ["https://i.imgur.com/aNixBpl.jpg"] },
-    { title: "Print Media", category: "", description: "Designed a wide range of print marketing materials, including flyers, brochures, business cards, menus, banners, and promotional collateral.", images: ["https://i.imgur.com/zRUzZ8N.jpg", "https://i.imgur.com/Btlw1xd.jpg", "https://i.imgur.com/2LLUMVC.jpg", "https://i.imgur.com/dSaHYDk.jpg", "https://i.imgur.com/VrMcaTF.jpg", "https://i.imgur.com/Ehd3jpa.jpg", "https://i.imgur.com/LteOcCG.jpg", "https://i.imgur.com/ZlkGqIv.jpg"] },
+    { title: "Print Media Design", category: "", description: "Designed a wide range of print marketing materials, including flyers, brochures, business cards, menus, banners, and promotional collateral.", images: ["https://i.imgur.com/zRUzZ8N.jpg", "https://i.imgur.com/Btlw1xd.jpg", "https://i.imgur.com/2LLUMVC.jpg", "https://i.imgur.com/dSaHYDk.jpg", "https://i.imgur.com/VrMcaTF.jpg", "https://i.imgur.com/Ehd3jpa.jpg", "https://i.imgur.com/LteOcCG.jpg", "https://i.imgur.com/ZlkGqIv.jpg"] },
     { title: "Packaging Design", category: "", description: "Designed packaging solutions from concept to production, including dieline creation, artwork layout, and 3D mockup presentations.", images: ["https://i.imgur.com/UEMS61W.jpg", "https://i.imgur.com/npvLmky.jpg", "https://i.imgur.com/MoknmVs.jpg"] },
     { title: "AI-Assisted Visualization", category: "", description: "Leveraging AI-assisted workflows to create concept visualizations, interior transformations, and image enhancements based on client requirements.", images: ["https://i.imgur.com/0zn6iOc.jpg"] },
     { title: "Website Design", category: "", description: "Designed the homepage and selected internal pages of the company website, including layouts, graphics, and visual elements, while ensuring consistency with the brand identity.", images: ["https://i.imgur.com/dkOVTbN.jpg", "https://i.imgur.com/QFpf2Re.jpg"] },
