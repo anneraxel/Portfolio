@@ -22,7 +22,8 @@
   *{margin:0;padding:0;box-sizing:border-box;}
   html{
     scroll-behavior:smooth;
-    scroll-snap-type:y mandatory;
+    scroll-snap-type:y proximity;
+    background:var(--sage);
   }
 
   body{
@@ -64,11 +65,12 @@
     scroll-snap-stop:always;
   }
   #about, #works, #contact{
-    scroll-margin-top:90px;
+  }
+  #works{
     height:100vh;
   }
   #about, #contact{
-    overflow-y:auto;
+    min-height:100vh;
   }
 
   /* ---------- Header ---------- */
@@ -139,12 +141,14 @@
     align-items:center;
     justify-content:center;
     text-align:center;
-    background:radial-gradient(ellipse 70% 55% at 50% 45%, var(--sage-light) 0%, var(--sage) 55%, var(--sage-dark) 100%);
+    background:
+      radial-gradient(ellipse 85% 80% at 50% 50%, transparent 50%, rgba(0,0,0,.6) 100%),
+      radial-gradient(ellipse 70% 55% at 50% 45%, var(--sage-light) 0%, var(--sage) 55%, var(--sage-dark) 100%);
     padding:0 20px;
   }
 
   .hero-title{
-    font-family:'Manrope',sans-serif;
+    font-family:'Stack Sans',sans-serif;
     font-weight:900;
     font-size:clamp(3.5rem,12vw,8.5rem);
     letter-spacing:2px;
@@ -273,15 +277,27 @@
     margin-bottom:20px;
   }
 
+  /* Flip-in entrance for Works / Contact titles — replays each
+     time the title scrolls into view. */
+  .reveal-title{
+    display:inline-block;
+    opacity:0;
+    transform:perspective(700px) rotateX(75deg) translateY(25px);
+    transform-origin:50% 100%;
+    transition:opacity .75s cubic-bezier(.22,.9,.28,1), transform .75s cubic-bezier(.22,.9,.28,1);
+  }
+  .reveal-title.in-view{
+    opacity:1;
+    transform:perspective(700px) rotateX(0deg) translateY(0);
+  }
+
   /* ---------- About ---------- */
   #about{
     background-color:var(--sage);
     background-image:url("https://i.imgur.com/fWOWmEl.jpg");
-    
+    background-size:cover;
     background-position:center;
     background-repeat:no-repeat;
-    background-width:100%;
-    background-height:auto;
   }
 
   .about-split{
@@ -318,9 +334,10 @@
   }
 
   /* ---------- Works ---------- */
-  #works{background:var(--grey-dark);}
+  #works{background:linear-gradient(150deg, var(--ink) 0%, #000000 100%);}
   #works .eyebrow{opacity:1;}
   #works .section-title, #works .eyebrow{color:var(--cream);}
+  #works .section-title{font-family:'Manrope',sans-serif;}
   #works .section-inner{padding-bottom:0;}
   .works-note{
     color:var(--cream-dim);
@@ -396,7 +413,7 @@
     flex-direction:column;
     justify-content:center;
     padding:70px 64px;
-    background:var(--sage-dark);
+    background:linear-gradient(150deg, var(--sage-dark) 0%, var(--sage) 100%);
     color:var(--cream);
   }
   .panel-index{
@@ -408,7 +425,7 @@
     margin-bottom:22px;
   }
   .panel-title{
-    font-family:'Google Sans',sans-serif;
+    font-family:'Baloo 2',sans-serif;
     font-weight:800;
     font-size:clamp(2rem,4.4vw,3.4rem);
     line-height:1.05;
@@ -416,7 +433,7 @@
     text-shadow:2px 2px 0 rgba(0,0,0,.35);
   }
   .panel-title-main{
-    font-family:'Manrope','Google Sans',sans-serif;
+    font-family:'Manrope','Baloo 2',sans-serif;
   }
   .panel-title-accent{
     font-family:'Tangerine',cursive;
@@ -572,45 +589,49 @@
 
   /* ---------- Contact ---------- */
   #contact{
-    background-image:url("https://i.imgur.com/fWOWmEl.jpg");
-    background-size:cover;
-    background-position:center;
-    background-repeat:no-repeat;
+    background:linear-gradient(150deg, var(--ink) 0%, #000000 100%);
+    display:flex;
+    align-items:center;
+    justify-content:center;
   .contact-info{
     max-width:520px;
   }
     }
+  #contact .eyebrow, #contact .section-title{color:var(--cream);}
+  #contact .section-title{font-family:'Manrope',sans-serif;}
+
   .contact-info p{
     font-size:1.05rem;
     line-height:1.85;
-    color:var(--ink-soft);
+    color:var(--cream-dim);
     margin-bottom:24px;
   }
   .contact-info a{
-    color:var(--ink);
+    color:var(--cream);
     font-weight:600;
     text-decoration:none;
-    border-bottom:2px solid var(--ink);
+    border-bottom:2px solid var(--cream);
   }
   .contact-list{list-style:none;margin-top:10px;}
   .contact-list li{
     font-family:'Baloo 2',sans-serif;
     margin-bottom:16px;
     font-size:1.05rem;
+    color:var(--cream);
   }
   .contact-list li span{
     display:block;
     font-size:.72rem;
     letter-spacing:2px;
     text-transform:uppercase;
-    color:var(--ink-soft);
+    color:var(--cream-dim);
     opacity:.7;
     margin-bottom:4px;
     font-family:'Poppins',sans-serif;
   }
 
   footer{
-    background:var(--ink);
+    background:var(--sage);
     color:var(--cream-dim);
     text-align:center;
     padding:26px;
@@ -669,7 +690,7 @@
         <img src="https://i.imgur.com/hh0jKUj.png" alt="Rachelle Anne Gimoro — portrait photo">
       </div>
       <div class="about-text-slot">
-        <img src="https://i.imgur.com/7TVCHfP.png" alt="About Rachelle Anne Gimoro — graphic designer bio, contact info, and skills">
+        <img src="https://i.imgur.com/ft4bAQD.png" alt="About Rachelle Anne Gimoro — graphic designer bio, contact info, and skills">
       </div>
     </div>
   </div>
@@ -680,8 +701,8 @@
   <div class="works-scroll" id="worksScroll">
     <div class="works-intro-panel">
       <div class="eyebrow">Selected</div>
-      <h2 class="section-title">Works</h2>
-      <p class="works-note">Designing professional marketing materials for both print and digital production, including brochures, flyers, posters, catalogs, menus, business cards, and promotional collateral with attention to layout and print-ready quality.</p>
+      <h2 class="section-title reveal-title">Works</h2>
+      <p class="works-note">Designing professional marketing materials for both print and digital production, including brochures, flyers, posters, catalogs, menus, <br>business cards, and promotional collateral with attention to <br>layout and print-ready quality.</p>
     </div>
   </div>
   <div class="works-dots" id="worksDots"></div>
@@ -698,10 +719,10 @@
 
 <!-- ================= CONTACT ================= -->
 <section id="contact">
-  <div class="section-inner">
+  <div class="section-inner" style="text-align:center;">
     <div class="eyebrow">Get in touch</div>
-    <h2 class="section-title">Contact</h2>
-    <div class="contact-info">
+    <h2 class="section-title reveal-title">Contact</h2>
+    <div class="contact-info" style="margin:0 auto;">
       <p>Interested in working together or have an opening in mind? Feel free to reach out — I'd love to hear from you.</p>
       <ul class="contact-list">
         <li><span>Email</span><a href="https://mail.google.com/mail/?view=cm&fs=1&to=anneraxel@gmail.com" target="_blank" rel="noopener">anneraxel@gmail.com</a></li>
@@ -721,7 +742,7 @@
     { title: "Logo Design", category: "", description: "A collection of logo concepts created for client briefs, design competitions, and branding projects across various industries.", images: ["https://i.imgur.com/aNixBpl.jpg"] },
     { title: "Print Media Design", category: "", description: "Designed a wide range of print marketing materials, including flyers, brochures, business cards, menus, banners, and promotional collateral.", images: ["https://i.imgur.com/zRUzZ8N.jpg", "https://i.imgur.com/Btlw1xd.jpg", "https://i.imgur.com/2LLUMVC.jpg", "https://i.imgur.com/dSaHYDk.jpg", "https://i.imgur.com/VrMcaTF.jpg", "https://i.imgur.com/Ehd3jpa.jpg", "https://i.imgur.com/LteOcCG.jpg", "https://i.imgur.com/ZlkGqIv.jpg"] },
     { title: "Packaging Design", category: "", description: "Designed packaging solutions from concept to production, including dieline creation, artwork layout, and 3D mockup presentations.", images: ["https://i.imgur.com/UEMS61W.jpg", "https://i.imgur.com/npvLmky.jpg", "https://i.imgur.com/MoknmVs.jpg"] },
-    { title: "AI-Assisted Visualization", category: "", description: "Leveraging AI-assisted workflows to create concept visualizations, interior transformations, and image enhancements based on client requirements.", images: ["https://i.imgur.com/0zn6iOc.jpg"] },
+    { title: "AI-Assisted Visualization", category: "", description: "Leveraging AI-assisted workflows to create concept visualizations, interior transformations, and image enhancements based on client requirements.", images: ["https://i.imgur.com/nhaTipe.jpg", "https://i.imgur.com/QWJdxGH.jpg", "https://i.imgur.com/m83rVfm.jpg"] },
     { title: "Website Design", category: "", description: "Designed the homepage and selected internal pages of the company website, including layouts, graphics, and visual elements, while ensuring consistency with the brand identity.", images: ["https://i.imgur.com/dkOVTbN.jpg", "https://i.imgur.com/QFpf2Re.jpg"] },
 
   ];
@@ -843,6 +864,19 @@
     if (!overlay.classList.contains("active")) return;
     if (e.key === "Escape") closeModal();
   });
+
+  // Flip-in reveal for the Works / Contact titles — replays every
+  // time the title scrolls back into view.
+  const revealTitles = document.querySelectorAll(".reveal-title");
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        entry.target.classList.toggle("in-view", entry.isIntersecting);
+      });
+    },
+    { threshold: 0.4 }
+  );
+  revealTitles.forEach((el) => revealObserver.observe(el));
 </script>
 </body>
 </html>
