@@ -6,7 +6,7 @@
 <title>RG — Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Caveat:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Caveat:wght@600;700&family=Poppins:wght@300;400;500;600&family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --sage-light:#aab89a;
@@ -319,13 +319,28 @@
      full-height panel, scrolled through independently like a
      mini "screen per project" experience. */
   .works-scroll{
-    margin-top:60px;
+    margin-top:0;
     height:100vh;
     overflow-y:auto;
     scroll-snap-type:y mandatory;
     scrollbar-width:none;
   }
   .works-scroll::-webkit-scrollbar{display:none;}
+
+  /* Works gets its own full centered intro screen before the
+     project panels start. */
+  .works-intro-panel{
+    height:100vh;
+    scroll-snap-align:start;
+    scroll-snap-stop:always;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:40px;
+  }
+  .works-intro-panel .works-note{margin:0 auto;}
 
   .work-panel{
     position:relative;
@@ -384,6 +399,24 @@
     line-height:1.05;
     margin-bottom:18px;
     text-shadow:2px 2px 0 rgba(0,0,0,.35);
+  }
+  .panel-title-main{
+    font-family:'Elms Sans','Baloo 2',sans-serif;
+  }
+  .panel-title-accent{
+    font-family:'Tangerine',cursive;
+    font-weight:700;
+    font-size:1.35em;
+    margin-left:6px;
+    text-shadow:none;
+  }
+  .panel-description{
+    color:var(--cream-dim);
+    font-size:1rem;
+    line-height:1.7;
+    max-width:440px;
+    margin-bottom:22px;
+    opacity:.9;
   }
   .panel-count{
     color:var(--cream-dim);
@@ -629,15 +662,14 @@
 
 <!-- ================= WORKS ================= -->
 <section id="works">
-  <div class="section-inner">
-    <div class="eyebrow">Selected</div>
-    <h2 class="section-title">Works</h2>
-    <p class="works-note">Designing professional marketing materials for both print and digital production, including brochures, flyers, posters, catalogs, menus, business cards, and promotional collateral with attention to layout and print-ready quality.</p>
+  <div class="works-scroll" id="worksScroll">
+    <div class="works-intro-panel">
+      <div class="eyebrow">Selected</div>
+      <h2 class="section-title">Works</h2>
+      <p class="works-note">Designing professional marketing materials for both print and digital production, including brochures, flyers, posters, catalogs, menus, business cards, and promotional collateral with attention to layout and print-ready quality.</p>
+    </div>
   </div>
-  <div style="position:relative;">
-    <div class="works-scroll" id="worksScroll"></div>
-    <div class="works-dots" id="worksDots"></div>
-  </div>
+  <div class="works-dots" id="worksDots"></div>
 </section>
 
 <!-- ================= PROJECT POPUP ================= -->
@@ -671,11 +703,11 @@
 
 <script>
   const projects = [
-    { title: "Logo Design", category: "", images: ["https://i.imgur.com/ZUKFGjW.jpg", "https://i.imgur.com/aNixBpl.jpg"] },
-    { title: "Print Media", category: "", images: ["https://i.imgur.com/DykVPvX.jpg", "https://i.imgur.com/zRUzZ8N.jpg", "https://i.imgur.com/Btlw1xd.jpg", "https://i.imgur.com/2LLUMVC.jpg", "https://i.imgur.com/dSaHYDk.jpg", "https://i.imgur.com/VrMcaTF.jpg", "https://i.imgur.com/Ehd3jpa.jpg", "https://i.imgur.com/LteOcCG.jpg", "https://i.imgur.com/ZlkGqIv.jpg"] },
-    { title: "Packaging Design", category: "", images: ["https://i.imgur.com/KPOMvGi.jpg", "https://i.imgur.com/UEMS61W.jpg", "https://i.imgur.com/npvLmky.jpg", "https://i.imgur.com/MoknmVs.jpg"] },
-    { title: "AI-Assisted Visualization", category: "", images: ["https://i.imgur.com/gkRi3gf.jpg" , "https://i.imgur.com/0zn6iOc.jpg"] },
-    { title: "Website Design", category: "", images: ["https://i.imgur.com/UC3yY3U.jpg", "https://i.imgur.com/dkOVTbN.jpg", "https://i.imgur.com/QFpf2Re.jpg"] },
+    { title: "Logo Design", category: "", description: "A collection of logo concepts created for client briefs, design competitions, and branding projects across various industries.", images: ["https://i.imgur.com/aNixBpl.jpg"] },
+    { title: "Print Media", category: "", description: "Designed a wide range of print marketing materials, including flyers, brochures, business cards, menus, banners, and promotional collateral.", images: ["https://i.imgur.com/zRUzZ8N.jpg", "https://i.imgur.com/Btlw1xd.jpg", "https://i.imgur.com/2LLUMVC.jpg", "https://i.imgur.com/dSaHYDk.jpg", "https://i.imgur.com/VrMcaTF.jpg", "https://i.imgur.com/Ehd3jpa.jpg", "https://i.imgur.com/LteOcCG.jpg", "https://i.imgur.com/ZlkGqIv.jpg"] },
+    { title: "Packaging Design", category: "", description: "Designed packaging solutions from concept to production, including dieline creation, artwork layout, and 3D mockup presentations.", images: ["https://i.imgur.com/UEMS61W.jpg", "https://i.imgur.com/npvLmky.jpg", "https://i.imgur.com/MoknmVs.jpg"] },
+    { title: "AI-Assisted Visualization", category: "", description: "Leveraging AI-assisted workflows to create concept visualizations, interior transformations, and image enhancements based on client requirements.", images: ["https://i.imgur.com/0zn6iOc.jpg"] },
+    { title: "Website Design", category: "", description: "Designed the homepage and selected internal pages of the company website, including layouts, graphics, and visual elements, while ensuring consistency with the brand identity.", images: ["https://i.imgur.com/dkOVTbN.jpg", "https://i.imgur.com/QFpf2Re.jpg"] },
 
   ];
 
@@ -707,11 +739,21 @@
     const num = String(index + 1).padStart(2, "0");
     const total = String(projects.length).padStart(2, "0");
 
+    // Split titles like "Logo Design" into an Elms Sans main word
+    // and a Tangerine "Design" accent, matching the hero badge.
+    // Titles without a trailing "Design" (e.g. "Print Media",
+    // "AI-Assisted Visualization") render fully in Elms Sans.
+    const designMatch = project.title.match(/^(.*)\s+(Design)$/);
+    const titleHtml = designMatch
+      ? `<span class="panel-title-main">${designMatch[1]}</span><span class="panel-title-accent">${designMatch[2]}</span>`
+      : `<span class="panel-title-main">${project.title}</span>`;
+
     panel.innerHTML = `
       <div class="panel-media">${mediaHtml}</div>
       <div class="panel-info">
         <div class="panel-index">${num} / ${total}</div>
-        <div class="panel-title">${project.title}</div>
+        <div class="panel-title">${titleHtml}</div>
+        <p class="panel-description">${project.description || ""}</p>
         <div class="panel-count">${project.images.length} image${project.images.length === 1 ? "" : "s"}</div>
         <div class="panel-cta">View project →</div>
       </div>
