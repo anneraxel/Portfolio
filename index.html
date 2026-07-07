@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RG — Portfolio</title>
+<title>RG — Portfolio.2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Caveat:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -66,8 +66,11 @@
     display:flex;
     align-items:center;
     justify-content:space-between;
-    padding:28px 48px;
+    padding:22px 48px;
     font-family:'Baloo 2',sans-serif;
+    background:rgba(170,184,154,.88);
+    backdrop-filter:blur(10px);
+    box-shadow:0 2px 14px rgba(35,38,31,.12);
   }
   .logo{
     font-weight:700;
@@ -162,14 +165,15 @@
     display:inline-flex;
     align-items:center;
     justify-content:center;
-    padding:14px 42px 20px;
-  }
-  .badge svg{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    z-index:0;
+    padding:22px 48px;
+    background-color:var(--brush);
+    background-image:url("");
+    background-size:100% 100%;
+    background-repeat:no-repeat;
+    background-position:center;
+    border-radius:8px;
+    min-width:340px;
+    min-height:90px;
   }
   .badge-text{
     position:relative;
@@ -239,14 +243,7 @@
   }
 
   /* ---------- About ---------- */
-  #about{background:var(--sage);padding-top:0px;}
-  #about .section-inner{
-    max-width:100%;
-    padding:40px 0 0;
-  }
-  #about .eyebrow{
-    padding-left:0px;
-  }
+  #about{background:var(--sage);}
   .about-image-wrap{
     width:100%;
   }
@@ -254,13 +251,15 @@
     display:block;
     width:100%;
     height:auto;
+    border-radius:10px;
+    box-shadow:0 10px 26px rgba(35,38,31,.25);
   }
   .about-image-placeholder{
     width:100%;
     aspect-ratio:16/9;
     background:var(--cream-dim);
-    border-top:3px dashed var(--sage-dark);
-    border-bottom:3px dashed var(--sage-dark);
+    border:3px dashed var(--sage-dark);
+    border-radius:10px;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -274,65 +273,123 @@
   #works{background:var(--sage-dark);}
   #works .eyebrow{opacity:1;}
   #works .section-title, #works .eyebrow{color:var(--cream);}
+  #works .section-inner{padding-bottom:20px;}
   .works-note{
     color:var(--cream-dim);
     font-size:.95rem;
-    margin-bottom:40px;
+    margin-bottom:0;
     max-width:600px;
     line-height:1.7;
   }
-  .works-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
-    gap:28px;
-  }
-  .work-card{
+
+  .works-slider{
     position:relative;
-    background:var(--cream);
-    border-radius:10px;
-    overflow:hidden;
-    aspect-ratio:4/3;
+    height:100vh;
+    overflow-y:scroll;
+    scroll-snap-type:y mandatory;
+  }
+  .work-slide{
+    height:100%;
+    scroll-snap-align:start;
+    scroll-snap-stop:always;
     display:flex;
-    flex-direction:column;
     align-items:center;
     justify-content:center;
-    color:var(--sage-dark);
-    border:4px solid var(--ink);
-    box-shadow:6px 6px 0 rgba(0,0,0,.25);
+    gap:60px;
+    padding:40px 60px;
     cursor:pointer;
-    transition:transform .2s ease;
-    text-align:center;
-    padding:20px;
   }
-  .work-card:hover{transform:translateY(-6px);}
-  .work-card .plus{
-    font-size:2.4rem;
-    font-family:'Baloo 2',sans-serif;
-    color:var(--sage-dark);
-    margin-bottom:8px;
+  .slide-image{
+    position:relative;
+    flex:1 1 55%;
+    max-width:640px;
+    aspect-ratio:4/3;
+    border-radius:12px;
+    overflow:hidden;
+    border:4px solid var(--ink);
+    box-shadow:8px 8px 0 rgba(0,0,0,.25);
+    background:var(--cream);
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
   }
-  .work-card span{
-    font-family:'Baloo 2',sans-serif;
-    font-size:.85rem;
-    letter-spacing:1px;
-    text-transform:uppercase;
-  }
-  .work-card img{
+  .slide-image img{
     position:absolute;
     inset:0;
     width:100%;
     height:100%;
     object-fit:cover;
-    display:block;
     transition:opacity .45s ease;
   }
-  /* First image shows by default; second image (if the project has
-     one) crossfades in on hover. If there's only one image, it just
-     stays put. */
-  .work-card img:nth-of-type(1){opacity:1;z-index:1;}
-  .work-card img:nth-of-type(2){opacity:0;z-index:2;}
-  .work-card:hover img:nth-of-type(1){opacity:0;}
-  .work-card:hover img:nth-of-type(2){opacity:1;}
+  /* First image shows by default; second (if present) crossfades in on hover */
+  .slide-image img:nth-of-type(1){opacity:1;z-index:1;}
+  .slide-image img:nth-of-type(2){opacity:0;z-index:2;}
+  .slide-image:hover img:nth-of-type(1){opacity:0;}
+  .slide-image:hover img:nth-of-type(2){opacity:1;}
+  .slide-image .plus{
+    font-family:'Baloo 2',sans-serif;
+    font-size:2.4rem;
+    color:var(--sage-dark);
+  }
+  .slide-info{
+    flex:1 1 30%;
+    max-width:380px;
+  }
+  .slide-info .slide-category{
+    display:block;
+    font-family:'Baloo 2',sans-serif;
+    font-size:.78rem;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:var(--cream-dim);
+    opacity:.85;
+    margin-bottom:12px;
+  }
+  .slide-info h3{
+    font-family:'Baloo 2',sans-serif;
+    font-weight:700;
+    font-size:clamp(1.6rem,3vw,2.4rem);
+    color:var(--cream);
+    margin-bottom:16px;
+    line-height:1.15;
+  }
+  .slide-info .slide-cta{
+    font-family:'Baloo 2',sans-serif;
+    font-size:.78rem;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:var(--cream);
+    border-bottom:2px solid var(--cream);
+    display:inline-block;
+    padding-bottom:2px;
+    cursor:pointer;
+  }
+  .works-counter{
+    position:absolute;
+    bottom:26px;
+    right:60px;
+    font-family:'Baloo 2',sans-serif;
+    color:var(--cream);
+    font-size:.9rem;
+    letter-spacing:2px;
+    z-index:5;
+    background:rgba(44,47,40,.45);
+    padding:7px 16px;
+    border-radius:20px;
+    pointer-events:none;
+  }
+
+  @media (max-width:820px){
+    .work-slide{
+      flex-direction:column;
+      padding:24px;
+      gap:22px;
+    }
+    .slide-image{max-width:100%;width:100%;}
+    .slide-info{max-width:100%;text-align:center;}
+    .works-counter{right:24px;bottom:16px;}
+  }
 
   /* ---------- Project Popup (Behance-style scrollable page) ---------- */
   .modal-overlay{
@@ -516,11 +573,15 @@
 <!-- ================= HOME / HERO ================= -->
 <section id="home">
   <h1 class="hero-title"><span class="letter">P</span><span class="letter">O</span><span class="letter">R</span><span class="letter">T</span><span class="letter">F</span><span class="letter">O</span><span class="letter">L</span><span class="letter">I</span><span class="letter">O</span></h1>
-
+background-image:url("https://i.imgur.com/qSfyLYb.png");
+  <!--
+    BADGE BACKGROUND IMAGE
+    Add your own graphic (brush stroke, shape, texture, anything) as
+    the background-image in the .badge CSS rule above, e.g.:
+      background-image:url("https://i.imgur.com/yourimage.png");
+    The badge box automatically stretches to fit whatever image you use.
+  -->
   <div class="badge">
-    <svg viewBox="0 0 420 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path fill="var(--brush)" d="M10,20 C8,45 6,60 14,75 C60,82 300,85 405,72 C412,55 410,30 402,15 C340,6 80,4 10,20 Z"/>
-    </svg>
     <div class="badge-text">
       <span class="graphic">GRAPHIC</span>
       <span class="design">Design</span>
@@ -534,7 +595,6 @@
 <!-- ================= ABOUT ================= -->
 <section id="about">
   <div class="section-inner">
-    <div class="eyebrow">About</div>
     <!--
       ABOUT IMAGE
       Since your own design already has your intro, contact info, and
@@ -545,9 +605,9 @@
       tablet, desktop) — no side margins, no cropping.
     -->
     <div class="about-image-wrap">
-       <img src="https://i.imgur.com/qXPX6Cp.jpg" alt="About Rachelle Anne Gimoro — graphic designer bio, contact info, and skills">
-     <!-- <div class="about-image-placeholder">Add your About page image here</div>
-       Once you have your image ready, delete the line above and use this instead:
+      <div class="about-image-placeholder">Add your About page image here</div>
+       <img src="https://i.imgur.com/X83P4gv.jpg" alt="About Rachelle Anne Gimoro — graphic designer bio, contact info, and skills">
+      <!-- Once you have your image ready, delete the line above and use this instead:
       <img src="about.jpg" alt="About Rachelle Anne Gimoro — graphic designer bio, contact info, and skills">
       -->
     </div>
@@ -559,9 +619,10 @@
   <div class="section-inner">
     <div class="eyebrow">Selected</div>
     <h2 class="section-title">Works</h2>
-    <p class="works-note">Each card below is a placeholder. Replace the content inside a card with your own screenshot / exported image (from your PDF or design file) — just drop in an &lt;img&gt; tag as shown in the code comments.</p>
-    <div class="works-grid" id="worksGrid"></div>
+    <p class="works-note">Scroll down to flip through each project — click one to view all of its images. Replace the sample titles/images below with your own; instructions are in the code comments.</p>
   </div>
+  <div class="works-slider" id="worksSlider"></div>
+  <div class="works-counter"><span id="slideCurrent">01</span> / <span id="slideTotal">06</span></div>
 </section>
 
 <!-- ================= PROJECT POPUP ================= -->
@@ -618,16 +679,37 @@
        { title: "Logo Design", hideTitle: true,
          images: ["works/logo-design-cover.jpg","works/logo-design-1.jpg"] }
   ========================================================= */
+  /* =========================================================
+     WORKS DATA
+     Edit this array to add your real projects.
+     - title: name shown in the slide and popup (also used for
+       accessibility, so keep it even if hideTitle is true)
+     - category: small label above the title (e.g. "Print & Packaging").
+       Optional — leave as "" to hide it.
+     - images: list of image file paths (1, 2, 3... as many as you like)
+       Leave an empty string "" to show a placeholder slot until
+       you have the real image ready. First image = the cover shown
+       in the slide; second image (if any) crossfades in on hover.
+     - hideTitle: set to true if your own image ALREADY has a title
+       baked into it (like your "LOGO DESIGN" cover slide) — this
+       stops the site from adding its own text heading on top of it.
+
+     Example:
+       { title: "Logo Design", category: "Branding", hideTitle: true,
+         images: ["works/logo-design-cover.jpg","works/logo-design-1.jpg"] }
+  ========================================================= */
   const projects = [
-    { title: "Logo Design", images: ["https://i.imgur.com/ZUKFGjW.jpg"] },
-    { title: "Print Media", images: ["https://i.imgur.com/mRo6xe3.jpg"] },
-    { title: "Project 03", images: [""] },
-    { title: "Project 04", images: [""] },
-    { title: "Project 05", images: [""] },
-    { title: "Project 06", images: [""] },
+    { title: "Logo Design", category: "", images: ["https://i.imgur.com/ZUKFGjW.jpg", "https://i.imgur.com/aNixBpl.jpg"] },
+    { title: "Print Media", category: "", images: ["https://i.imgur.com/DykVPvX.jpg", "https://i.imgur.com/mRo6xe3.jpg"] },
+    { title: "Project 03", category: "", images: [""] },
+    { title: "Project 04", category: "", images: [""] },
+    { title: "Project 05", category: "", images: [""] },
+    { title: "Project 06", category: "", images: [""] },
   ];
 
-  const worksGrid = document.getElementById("worksGrid");
+  const worksSlider = document.getElementById("worksSlider");
+  const slideCurrentEl = document.getElementById("slideCurrent");
+  const slideTotalEl = document.getElementById("slideTotal");
   const overlay = document.getElementById("modalOverlay");
   const modalTitle = document.getElementById("modalTitle");
   const modalFrame = document.getElementById("modalFrame");
@@ -635,26 +717,43 @@
 
   let currentProject = 0;
 
-  // Build the work cards from the projects array.
-  // The first image is the default cover; if a second image exists,
-  // it crossfades in on hover (see .work-card img:nth-of-type CSS).
+  // Build one full-screen slide per project. Scrolling inside the
+  // Works section snaps from one slide to the next, like flipping
+  // through pages 01, 02, 03...
   projects.forEach((project, index) => {
-    const card = document.createElement("div");
-    card.className = "work-card";
-    card.onclick = () => openProject(index);
+    const slide = document.createElement("div");
+    slide.className = "work-slide";
 
     const firstImage = project.images[0];
     const secondImage = project.images[1];
 
+    let imageHtml;
     if (firstImage) {
-      let html = `<img src="${firstImage}" alt="${project.title}">`;
-      if (secondImage) html += `<img src="${secondImage}" alt="${project.title}">`;
-      card.innerHTML = html;
+      imageHtml = `<img src="${firstImage}" alt="${project.title}">`;
+      if (secondImage) imageHtml += `<img src="${secondImage}" alt="${project.title}">`;
     } else {
-      card.innerHTML = `<div class="plus">+</div><span>${project.title}</span>`;
+      imageHtml = `<div class="plus">+</div>`;
     }
 
-    worksGrid.appendChild(card);
+    slide.innerHTML = `
+      <div class="slide-image">${imageHtml}</div>
+      <div class="slide-info">
+        ${project.category ? `<span class="slide-category">${project.category}</span>` : ""}
+        <h3>${project.title}</h3>
+        <span class="slide-cta">View project</span>
+      </div>
+    `;
+
+    slide.onclick = () => openProject(index);
+    worksSlider.appendChild(slide);
+  });
+
+  slideTotalEl.textContent = String(projects.length).padStart(2, "0");
+
+  // Update the "01 / 06" counter as the person scrolls through slides
+  worksSlider.addEventListener("scroll", () => {
+    const index = Math.round(worksSlider.scrollTop / worksSlider.clientHeight) + 1;
+    slideCurrentEl.textContent = String(Math.min(index, projects.length)).padStart(2, "0");
   });
 
   function openProject(index) {
