@@ -99,6 +99,11 @@
   header:hover{
     transform:translateY(0);
   }
+  /* Visible by default on the hero; removed once you scroll past it,
+     after which the header falls back to hover-to-reveal only. */
+  header.force-visible{
+    transform:translateY(0);
+  }
   .logo{
     font-weight:700;
     font-size:1.25rem;
@@ -223,14 +228,22 @@
     font-family:'Manrope',sans-serif;
     font-weight:700;
     font-size:clamp(1.4rem,3.4vw,2.2rem);
-    color:var(--cream);
     letter-spacing:1px;
+    animation:colorShift 3.5s ease-in-out infinite;
   }
   .badge-text .design{
     font-family:'Tangerine',cursive;
     font-weight:700;
     font-size:clamp(1.8rem,4.4vw,2.8rem);
-    color:var(--cream);
+    animation:colorShift 3.5s ease-in-out infinite;
+    animation-delay:.4s;
+  }
+  @keyframes colorShift{
+    0%, 100%{color:var(--cream);}
+    50%{color:var(--sage-light);}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .badge-text .graphic, .badge-text .design{animation:none;color:var(--cream);}
   }
 
   .scroll-hint{
@@ -877,6 +890,19 @@
     { threshold: 0.4 }
   );
   revealTitles.forEach((el) => revealObserver.observe(el));
+
+  // Header starts visible on the hero, then switches to
+  // hover-to-reveal once you've scrolled past it.
+  const headerEl = document.querySelector('header');
+  function updateHeaderVisibility(){
+    if (window.scrollY < window.innerHeight * 0.7) {
+      headerEl.classList.add('force-visible');
+    } else {
+      headerEl.classList.remove('force-visible');
+    }
+  }
+  window.addEventListener('scroll', updateHeaderVisibility, { passive: true });
+  updateHeaderVisibility();
 </script>
 </body>
 </html>
